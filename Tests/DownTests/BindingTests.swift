@@ -7,7 +7,9 @@
 //
 
 import XCTest
+#if !os(xrOS)
 import SnapshotTesting
+#endif
 @testable import Down
 
 class BindingTests: XCTestCase {
@@ -18,6 +20,8 @@ class BindingTests: XCTestCase {
         _ = try down.toAST()
     }
 
+    #if !os(xrOS)
+    
     func testHTMLBindingsWork() throws {
         let html = try down.toHTML()
         assertSnapshot(matching: html, as: .lines)
@@ -42,5 +46,7 @@ class BindingTests: XCTestCase {
         let commonMark = try down.toCommonMark()
         assertSnapshot(matching: commonMark, as: .lines)
     }
+    
+    #endif
 
 }

@@ -45,7 +45,7 @@ let package = Package(
             name: "DownTests",
             dependencies: [
                 "Down",
-                .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
+                .product(name: "SnapshotTesting", package: "swift-snapshot-testing", condition: .when(platforms: [.iOS, .macOS])),
             ],
             path: "Tests/DownTests",
             exclude: [
