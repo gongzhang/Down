@@ -1,13 +1,14 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.9
 
 import PackageDescription
 
 let package = Package(
     name: "Down",
     platforms: [
-        .macOS("10.11"),
-        .iOS("9.0"),
-        .tvOS("9.0")
+        .macOS(.v10_13),
+        .iOS(.v12),
+        .tvOS(.v12),
+        .visionOS(.v1),
     ],
     products: [
         .library(

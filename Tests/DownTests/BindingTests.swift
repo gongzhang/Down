@@ -7,7 +7,7 @@
 //
 
 import XCTest
-#if !os(xrOS)
+#if !os(xrOS) && !os(watchOS)
 import SnapshotTesting
 #endif
 @testable import Down
@@ -20,7 +20,7 @@ class BindingTests: XCTestCase {
         _ = try down.toAST()
     }
 
-    #if !os(xrOS)
+    #if !os(xrOS) && !os(watchOS)
     
     func testHTMLBindingsWork() throws {
         let html = try down.toHTML()

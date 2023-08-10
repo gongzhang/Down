@@ -14,10 +14,6 @@
 
 #else
 
-#if os(xrOS)
-import SwiftUI
-#endif
-
 import WebKit
 
 // MARK: - Public API
@@ -248,11 +244,9 @@ extension DownView: WKNavigationDelegate {
     @available(iOSApplicationExtension, unavailable)
     func openURL(url: URL) {
         #if os(xrOS)
-            // FIXME: reimplement openURL
-            @Environment(\.openURL) var openURL
-            openURL(url)
+            UIApplication.shared.open(url)
         #elseif os(iOS)
-            _ = UIApplication.shared.openURL(url)
+            UIApplication.shared.open(url)
         #elseif os(macOS)
             NSWorkspace.shared.open(url)
         #endif
