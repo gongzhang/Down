@@ -136,7 +136,7 @@ private extension DownView {
         let htmlString = try markdownString.toHTML(options)
         let pageHTMLString = try htmlFromTemplate(htmlString)
 
-        #if os(iOS)
+        #if os(iOS) || os(visionOS)
         if writableBundle {
             let newIndexUrl = try writeTempIndexFile(pageHTMLString: pageHTMLString)
             loadFileURL(newIndexUrl, allowingReadAccessTo: newIndexUrl.deletingLastPathComponent())
@@ -154,7 +154,7 @@ private extension DownView {
         return template.replacingOccurrences(of: "DOWN_HTML", with: htmlString)
     }
 
-    #if os(iOS)
+    #if os(iOS) || os(visionOS)
     func writeTempIndexFile(pageHTMLString: String) throws -> URL {
         let newIndexUrl = bundle.resourceURL!.appendingPathComponent("tmp_index.html")
         try pageHTMLString.write(to: newIndexUrl, atomically: true, encoding: .utf8)
@@ -243,9 +243,7 @@ extension DownView: WKNavigationDelegate {
 
     @available(iOSApplicationExtension, unavailable)
     func openURL(url: URL) {
-        #if os(xrOS)
-            UIApplication.shared.open(url)
-        #elseif os(iOS)
+        #if os(iOS) || os(visionOS)
             UIApplication.shared.open(url)
         #elseif os(macOS)
             NSWorkspace.shared.open(url)

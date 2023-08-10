@@ -6,7 +6,7 @@
 //  Copyright © 2016-2019 Down. All rights reserved.
 //
 
-#if os(iOS)
+#if os(iOS) || os(visionOS)
 
 class ThematicBreakSyleTests: StylerTestSuite {
 
