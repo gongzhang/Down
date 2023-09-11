@@ -15,6 +15,9 @@ let package = Package(
             targets: ["Down"]
         )
     ],
+    dependencies: [
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", .exactItem("1.8.2")),
+    ],
     targets: [
         .target(
             name: "libcmark",
@@ -40,7 +43,10 @@ let package = Package(
         ),
         .testTarget(
             name: "DownTests",
-            dependencies: ["Down"],
+            dependencies: [
+                "Down",
+                .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
+            ],
             path: "Tests/DownTests",
             exclude: [
                 "AST/VisitorTests.swift",
