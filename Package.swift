@@ -29,7 +29,10 @@ let package = Package(
               "entities.inc",
               "COPYING"
             ],
-            publicHeadersPath: "./"
+            publicHeadersPath: "./",
+            cSettings: [
+                .unsafeFlags(["-Wno-conversion"])
+            ]
         ),
         .target(
             name: "Down",
