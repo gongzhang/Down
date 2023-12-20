@@ -1,13 +1,14 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.9
 
 import PackageDescription
 
 let package = Package(
     name: "Down",
     platforms: [
-        .macOS("10.11"),
-        .iOS("9.0"),
-        .tvOS("9.0")
+        .macOS(.v10_13),
+        .iOS(.v12),
+        .tvOS(.v12),
+        .visionOS(.v1),
     ],
     products: [
         .library(
@@ -16,7 +17,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", .upToNextMajor(from: "1.8.2")),
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", .upToNextMajor(from: "1.11.1")),
     ],
     targets: [
         .target(
@@ -48,7 +49,7 @@ let package = Package(
             name: "DownTests",
             dependencies: [
                 "Down",
-                .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
+                .product(name: "SnapshotTesting", package: "swift-snapshot-testing", condition: .when(platforms: [.iOS, .macOS])),
             ],
             path: "Tests/DownTests",
             exclude: [
